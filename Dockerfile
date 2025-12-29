@@ -1,14 +1,27 @@
-FROM ubuntu:18.04
-LABEL org.opencontainers.image.source https://github.com/rez0n/ant-media-server
-ARG RELEASE_URL
+version: "3.8"
 
-RUN apt-get update --fix-missing \
-	&& apt-get -y install libx11-dev unzip wget openjdk-11-jdk ca-certificates p11-kit --no-install-recommends \
-	&& wget --no-check-certificate ${RELEASE_URL} -O /tmp/ant.zip \
-	&& 	unzip /tmp/ant.zip -d /usr/local/ \
-	&& 	mv /usr/local/ant-media-server /usr/local/antmedia \
-	&& 	rm -rfv /var/lib/apt/lists/* /tmp/*
+services:
+  antmedia:
+    image: antmedia/ant-media-server:v2.9.1
+    container_name: ant-media
+    restart: unless-stopped
 
-WORKDIR /usr/local/antmedia
-RUN chmod 775 /usr/local/antmedia/start.sh
-ENTRYPOINT /bin/bash -c /usr/local/antmedia/start.sh
+    environment:
+      - SERVER_MODE=standalone
+      - AMS_PUBLIC_IP=65.20.109.33
+      - JAVA_OPTS=-Xms1g -Xmx2g
+      # Enterprise only:
+      # - LICENSE_KEY=XXXX-XXXX
+
+    ports:
+      - "5080:5080"
+      - "1935:1935"
+      - "5443:5443"
+      - "5554:5554"
+      - "40000-65535:40000-65535/udp"
+
+    volumes:
+      - antmedia-data:/usr/local/antmedia
+
+volumes:
+  antmedia-data:
