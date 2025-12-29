@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   antmedia:
     image: antmedia/ant-media-server:v2.9.1
