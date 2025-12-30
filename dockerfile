@@ -24,7 +24,7 @@ RUN wget -O install_ant-media-server.sh \
     && chmod +x install_ant-media-server.sh
 
 # Install Ant Media Server
-RUN ./install_ant-media-server.sh -i ant-media-server-community-2.16.2.zip
+#RUN ./install_ant-media-server.sh -i ant-media-server-community-2.16.2.zip
 
 # Cleanup
 RUN rm -f ant-media-server-community-2.16.2.zip install_ant-media-server.sh
