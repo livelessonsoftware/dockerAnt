@@ -3,23 +3,41 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
-# Install required tools
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     wget \
     unzip \
+    curl \
     openjdk-17-jdk \
+    net-tools \
+    iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 
-# Download Ant Media Server
-RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.11.3/ant-media-server-community-2.11.3.zip \
-    && unzip ant-media-server-community-2.11.3.zip \
-    && mv ant-media-server /usr/local/antmedia \
-    && rm ant-media-server-community-2.11.3.zip
+# Download Ant Media Server ZIP
+RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.11.3/ant-media-server-community-2.11.3.zip
 
+# Download installer script
+RUN wget -O install_ant-media-server.sh \
+    https://raw.githubusercontent.com/ant-media/Scripts/master/install_ant-media-server.sh \
+    && chmod +x install_ant-media-server.sh
+
+# Install Ant Media Server
+RUN ./install_ant-media-server.sh -i ant-media-server-community-2.11.3.zip
+
+# Cleanup
+RUN rm -f ant-media-server-community-2.11.3.zip install_ant-media-server.sh
+
+WORKDIR /usr/local/antmedia
+
+# Expose Ant Media ports
 EXPOSE 5080 5443 1935
 EXPOSE 5000-5005/udp
 EXPOSE 42000-42010/udp
 
-CMD ["/usr/local/antmedia/start.sh"]
+# Startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
