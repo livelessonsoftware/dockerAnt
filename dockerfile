@@ -33,7 +33,10 @@ RUN a2ensite antmedia.livelesson.site.conf
 WORKDIR /usr/local/antmedia
 # RUN ./enable_ssl.sh -d antmedia.livelesson.site
 RUN systemctl restart apache2
-EXPOSE http://antmedia.livelesson.site:5080
+EXPOSE 5080 5443 1935
+EXPOSE 5000-5005/udp
+EXPOSE 42000-42010/udp
+# EXPOSE http://antmedia.livelesson.site:5080
 # Download Ant Media Server ZIP
 # RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.16.2/ant-media-server-community-2.16.2.zip
 
