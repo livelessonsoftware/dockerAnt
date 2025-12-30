@@ -3,6 +3,7 @@ version: "3.8"
 services:
   ant-media:
     build: .
+    image: antmedia/ant-media-server-community:latest
     container_name: ant-media
     restart: unless-stopped
 
