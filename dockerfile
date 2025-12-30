@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /opt
 
 # Download Ant Media Server ZIP
-RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.11.3/ant-media-server-community-2.11.3.zip
+RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.16.2/ant-media-server-community-2.16.2.zip
 
 # Download installer script
 RUN wget -O install_ant-media-server.sh \
@@ -24,10 +24,10 @@ RUN wget -O install_ant-media-server.sh \
     && chmod +x install_ant-media-server.sh
 
 # Install Ant Media Server
-RUN ./install_ant-media-server.sh -i ant-media-server-community-2.11.3.zip
+RUN ./install_ant-media-server.sh -i ant-media-server-community-2.16.2.zip
 
 # Cleanup
-RUN rm -f ant-media-server-community-2.11.3.zip install_ant-media-server.sh
+RUN rm -f ant-media-server-community-2.16.2.zip install_ant-media-server.sh
 
 WORKDIR /usr/local/antmedia
 
