@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /opt
 
 
-RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.16.2/ant-media-server-community-2.11.3.zip
+RUN wget https://github.com/ant-media/Ant-Media-Server/releases/download/ams-v2.16.2/ant-media-server-community-2.16.2.zip
 
 RUN wget -O install_ant-media-server.sh https://raw.githubusercontent.com/ant-media/Scripts/master/install_ant-media-server.sh
 
