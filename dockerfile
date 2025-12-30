@@ -31,7 +31,7 @@ RUN a2enmod proxy proxy_http
 RUN a2ensite antmedia.livelesson.site.conf
 
 WORKDIR /usr/local/antmedia
-RUN ./enable_ssl.sh -d antmedia.livelesson.site
+# RUN ./enable_ssl.sh -d antmedia.livelesson.site
 RUN systemctl restart apache2
 EXPOSE http://antmedia.livelesson.site:5080
 # Download Ant Media Server ZIP
