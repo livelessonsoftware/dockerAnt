@@ -23,7 +23,8 @@ RUN wget -O install_ant-media-server.sh https://raw.githubusercontent.com/ant-me
 RUN chmod +x install_ant-media-server.sh
 
 # RUN ./install_ant-media-server.sh -i ant-media-server-community-2.16.2.zip
-FROM antmedia/ant-media-server:2.16.2
+FROM antmedia/ant-media-server:latest
+
 
 RUN nano /etc/apache/sites-available/antmedia.livelesson.site.conf
 
