@@ -3,7 +3,7 @@ version: "3.8"
 services:
   ant-media:
     image: nibrev/ant-media-server:latest
-    container_name: ant-media
+    # container_name: ant-media
     restart: unless-stopped
 
     volumes:
