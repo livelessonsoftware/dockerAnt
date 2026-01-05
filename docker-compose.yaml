@@ -3,7 +3,6 @@ version: "3.8"
 services:
   ant-media:
     image: nibrev/ant-media-server:latest
-    # image: jamiemac96/ant-media-server-community:latest
     container_name: ant-media
     restart: unless-stopped
 
@@ -13,7 +12,6 @@ services:
 
     ports:
       - "5080:5080"
-      - "5443:5443"
       - "1935:1935"
       - "5000-5005:5000-5005/udp"
       - "42000-42010:42000-42010/udp"
