@@ -4,13 +4,13 @@ services:
   ant-media:
     # image: nibrev/ant-media-server:latest
     image: jamiemac96/ant-media-server-community:latest
-    container_name: ant-media
+    # container_name: ant-media
     restart: unless-stopped
 
     volumes:
       - antmedia-data:/usr/local/antmedia
       - antmedia-logs:/usr/local/antmedia/log
-      - ./antmedia-ssl:/usr/local/antmedia/conf/ssl
+      # - ./antmedia-ssl:/usr/local/antmedia/conf/ssl
 
     ports:
       - "5080:5080"   # HTTP Web Panel
