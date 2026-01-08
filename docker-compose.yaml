@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   antmedia:
-    image: antmedia/ant-media-server:latest
+    image: jamiemac96/ant-media-server-community:latest
+
     container_name: antmedia
     restart: unless-stopped
 
