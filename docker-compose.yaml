@@ -1,35 +1,35 @@
 version: "3.8"
 
 services:
-  ant-media:
-    # image: nibrev/ant-media-server:latest
-    image: jamiemac96/ant-media-server-community:latest
-   
+  antmedia:
+    image: antmedia/ant-media-server:latest
+    container_name: antmedia
     restart: unless-stopped
-    ulimits:
-      nofile:
-        soft: 65536
-        hard: 65536
+
+    environment:
+      - AMS_SERVER_MODE=standalone
+      - JAVA_OPTS=-Xms2G -Xmx4G
+      - ANT_MEDIA_IP=0.0.0.0
 
     volumes:
-      - antmedia-data:/usr/local/antmedia
-      - antmedia-logs:/usr/local/antmedia/log
-  
+      - antmedia_data:/usr/local/antmedia
 
     ports:
-      - "5080:5080"   # HTTP Web Panel
-     
-      - "1935:1935"
-      - "5000-5005:5000-5005/udp"
-      - "42000-42010:42000-42010/udp"
+      # Web Panel / REST
+      - "5080:5080"
 
-    networks:
-      - coolify
+      # WebRTC
+      - "5443:5443"
+      - "1935:1935"
+      - "5554-5560:5554-5560/udp"
+
+    labels:
+      # Traefik HTTP Router
+      - "traefik.enable=true"
+      - "traefik.http.routers.antmedia.rule=Host(`ams.livelesson.name.ng`)"
+      - "traefik.http.routers.antmedia.entrypoints=websecure"
+      - "traefik.http.routers.antmedia.tls=true"
+      - "traefik.http.services.antmedia.loadbalancer.server.port=5080"
 
 volumes:
-  antmedia-data:
-  antmedia-logs:
-
-networks:
-  coolify:
-    external: true
+  antmedia_data:
