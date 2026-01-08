@@ -1,35 +1,17 @@
-version: "3.8"
-
 services:
   ant-media:
-    # image: nibrev/ant-media-server:latest
     image: jamiemac96/ant-media-server-community:latest
-   
     restart: unless-stopped
     ulimits:
       nofile:
         soft: 65536
         hard: 65536
-
     volumes:
       - antmedia-data:/usr/local/antmedia
-      - antmedia-logs:/usr/local/antmedia/log
-  
-
     ports:
-      - "5080:5080"   # HTTP Web Panel
-      # - "5443:5443"   # Internal HTTPS (optional)
+      - "5080:5080"
       - "1935:1935"
       - "5000-5005:5000-5005/udp"
       - "42000-42010:42000-42010/udp"
-
     networks:
       - coolify
-
-volumes:
-  antmedia-data:
-  antmedia-logs:
-
-networks:
-  coolify:
-    external: true
