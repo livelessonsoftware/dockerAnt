@@ -18,7 +18,7 @@ services:
 
     ports:
       - "5080:5080"   # HTTP Web Panel
-      - "5443:5443"   # Internal HTTPS (optional)
+      # - "5443:5443"   # Internal HTTPS (optional)
       - "1935:1935"
       - "5000-5005:5000-5005/udp"
       - "42000-42010:42000-42010/udp"
